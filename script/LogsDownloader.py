@@ -230,7 +230,7 @@ class LogsDownloader:
         if self.config.SYSLOG_ENABLE == 'YES':
             for msg in decrypted_file.splitlines():
                 if msg != '':
-                    emit = loggerglue.emitter.UDPSyslogEmitter((self.config.SYSLOG_ADDRESS, int(self.config.SYSLOG_PORT)))
+                    emit = loggerglue.emitter.TCPSyslogEmitter((self.config.SYSLOG_ADDRESS, int(self.config.SYSLOG_PORT)))
                     logger = loggerglue.logger.Logger(emitter=emit, hostname=platform.node())
                     logger.log(msg, prival=loggerglue.constants.LOG_USER | loggerglue.constants.LOG_INFO, timestamp=time.strftime('%b %d %H:%M:%S'))
                     emit.emit(msg)
