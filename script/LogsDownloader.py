@@ -488,7 +488,7 @@ class Config:
             config.SYSLOG_ENABLE = config_parser.get('SETTINGS', 'SYSLOG_ENABLE')
             config.SYSLOG_ADDRESS = config_parser.get('SETTINGS', 'SYSLOG_ADDRESS')
             config.SYSLOG_PORT = config_parser.get('SETTINGS', 'SYSLOG_PORT')
-            config.SAVE_NEWFORMAT = config_parser.get('SETTINGS', 'SAVE_NEWFORMAT')
+            config.SAVE_NEWDATEFORMAT = config_parser.get('SETTINGS', 'SAVE_NEWDATEFORMAT')
             return config
         else:
             self.logger.error("Could Not find configuration file %s", config_file)
