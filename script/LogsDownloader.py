@@ -54,6 +54,7 @@ import M2Crypto
 import loggerglue
 import loggerglue.emitter
 import loggerglue.logger
+import shutil
 from Crypto.Cipher import AES
 
 """
@@ -237,7 +238,12 @@ class LogsDownloader:
         if self.config.SAVE_LOCALLY == "YES":
             local_file = open(self.config.PROCESS_DIR + filename, "a+")
             local_file.writelines(decrypted_file)
-
+        if self.config.SAVE_NEWFORMAT == "YES":
+            local_file_of = self.config.PROCESS_DIR + filename
+            local_file_nf = time.strftime(self.config.PROCESS_DIR + '%Y%m%d%H%M.log')
+            local_file.close()
+            shutil.move(local_file_of, local_file_nf)
+            
     """
     Decrypt a file content
     """
@@ -290,6 +296,7 @@ class LogsDownloader:
     Downloads a log file
     """
     def download_log_file(self, filename):
+        time.sleep(60)
         # get the file name
         filename = str(filename.rstrip("\r\n"))
         try:
@@ -481,6 +488,7 @@ class Config:
             config.SYSLOG_ENABLE = config_parser.get('SETTINGS', 'SYSLOG_ENABLE')
             config.SYSLOG_ADDRESS = config_parser.get('SETTINGS', 'SYSLOG_ADDRESS')
             config.SYSLOG_PORT = config_parser.get('SETTINGS', 'SYSLOG_PORT')
+            config.SAVE_NEWFORMAT = config_parser.get('SETTINGS', 'SAVE_NEWFORMAT')
             return config
         else:
             self.logger.error("Could Not find configuration file %s", config_file)
