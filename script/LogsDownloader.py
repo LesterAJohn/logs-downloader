@@ -238,7 +238,7 @@ class LogsDownloader:
         if self.config.SAVE_LOCALLY == "YES":
             local_file = open(self.config.PROCESS_DIR + filename, "a+")
             local_file.writelines(decrypted_file)
-        if self.config.SAVE_NEWFORMAT == "YES":
+        if self.config.SAVE_NEWDATEFORMAT == "YES":
             local_file_of = self.config.PROCESS_DIR + filename
             local_file_nf = time.strftime(self.config.PROCESS_DIR + '%Y%m%d%H%M.log')
             local_file.close()
