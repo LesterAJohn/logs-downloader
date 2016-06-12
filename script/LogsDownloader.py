@@ -182,7 +182,7 @@ class LogsDownloader:
     """
     Download a log file, decrypt, unzip, and store it
     """
-    def handle_file(self, logfile, wait_time=30):
+    def handle_file(self, logfile, wait_time=60):
         # we will try to get the file a max of 3 tries
         counter = 0
         while counter <= 3:
@@ -239,8 +239,9 @@ class LogsDownloader:
             local_file = open(self.config.PROCESS_DIR + filename, "a+")
             local_file.writelines(decrypted_file)
         if self.config.SAVE_NEWDATEFORMAT == "YES":
+            time.sleep(5)
             local_file_of = self.config.PROCESS_DIR + filename
-            local_file_nf = time.strftime(self.config.PROCESS_DIR + '%Y%m%d%H%M.log')
+            local_file_nf = time.strftime(self.config.PROCESS_DIR + '%Y%m%d%H%M%S.log')
             local_file.close()
             shutil.move(local_file_of, local_file_nf)
             
@@ -296,7 +297,6 @@ class LogsDownloader:
     Downloads a log file
     """
     def download_log_file(self, filename):
-        time.sleep(60)
         # get the file name
         filename = str(filename.rstrip("\r\n"))
         try:
