@@ -182,7 +182,7 @@ class LogsDownloader:
     """
     Download a log file, decrypt, unzip, and store it
     """
-    def handle_file(self, logfile, wait_time=60):
+    def handle_file(self, logfile, wait_time=15):
         # we will try to get the file a max of 3 tries
         counter = 0
         while counter <= 3:
